@@ -1,6 +1,6 @@
 # Start Symfony with Docker from ZERO 
 
-### first you need to setup the Docker 
+### First you need to setup the Docker 
     
     To setup the best docker for your symfony 6 you can find it in 
 
@@ -8,7 +8,7 @@
 
     clone the repository and follow the steps mentioned in the "README.md" available in the mentioned repo.
 
-### clone the symfony 6 using composer and run it with Docker
+### Clone the symfony 6 using composer and run it with Docker
 
 ```bash
 cd <path to the Docker folder>
@@ -40,23 +40,23 @@ volumes:
 docker-compose up -d
 ```
 
-**copy composer.phar into project**
+**Copy composer.phar into project**
 ```bash
 cp composer.phar ../<project_name>/
 ```
 
-**install some require packages using composer** 
+**Install some basic required packages using composer** 
 ```bash
 cd ../<project_name>
 docker-compose exec php composer.phar require webapp
 ```
-> ### *** your project is clonned *** ###
+> ### *** Your project is clonned *** ###
 
 ### Run your Project locally
 
 open URL [localhost:8080](http://localhost:8080/) in your browser
 
-### setting up databse with Mysql
+### Setting up databse with Mysql
 
 change your .env file
 
