@@ -8,11 +8,12 @@
 
     clone the repository and follow the steps mentioned in the "README.md" available in the mentioned repo.
 
-### clone the symfony 6 using composer 
+### clone the symfony 6 using composer and run it with Docker
 
 ```bash
 cd <path to the Docker folder>
 docker-compose exec php php compose.phar create-project symfony/skeleton:"6.1.*" <project_name>
+
 ```
 
 > ***Your new project must be clonned beside the Docker folder***
@@ -44,12 +45,46 @@ docker-compose up -d
 cp composer.phar ../<project_name>/
 ```
 
-### install some require packages using composer ###
+**install some require packages using composer** 
 ```bash
 cd ../<project_name>
-
 docker-compose exec php composer.phar require webapp
 ```
 > ### *** your project is clonned *** ###
 
+### Run your Project locally
 
+open URL [localhost:8080](http://localhost:8080/) in your browser
+
+### setting up databse with Mysql
+
+change your .env file
+
+```diff
+# DATABASE_URL="sqlite:///%kernel.project_dir%/var/data.db"
++DATABASE_URL="mysql://root:root@mysql:3306/<Add your Database name here>?serverVersion=5.7&charset=utf8mb4"
+-DATABASE_URL="postgresql://symfony:ChangeMe@127.0.0.1:5432/app?serverVersion=13&charset=utf8"
+###< doctrine/doctrine-bundle ###
+```
+Change your docker-compose.yml in project folder **not from the docker**
+
+```diff
+###> doctrine/doctrine-bundle ###
+-  database:
+-    image: postgres:${POSTGRES_VERSION:-13}-alpine
+-    environment:
+-      POSTGRES_DB: ${POSTGRES_DB:-app}
+-      # You should definitely change the password in production
+-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ChangeMe}
+-      POSTGRES_USER: ${POSTGRES_USER:-symfony}
+-    volumes:
++  database:
++    image: mysql:5.7
++    environment:
++      - MYSQL_ROOT_PASSWORD=root
++    volumes:
++      - ./mysql57:/var/lib/mysql
+       # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
+```
+
+### ***your project is ready to work with Mysql and Docker***
